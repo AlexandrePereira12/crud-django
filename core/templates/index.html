@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRUD</title>
+</head>
+<body>
+    <H1>Olá, Essas são as pessoas cadastradas no sistema até o momento</H1>
+
+    <ul>
+        {% for pessoa in pessoas %}
+            <li>{{pessoa.id}} - {{pessoa.nome}} - {{pessoa.dt_nascimento}} 
+                <a href="{% url 'editar' pessoa.id %}">Editar</a>
+                <a href="{% url 'delete' pessoa.id %}">Deletar</a>
+            </li>
+        {% endfor %}
+    </ul>
+
+    
+    <form action="{% url 'salvar' %}" method="POST">
+        {% csrf_token %}
+        <input type="text" name = 'nome'>
+        <input type="date" name="dt_nascimento">
+        <button type="submit">salvar</button>
+
+    </form>
+</body>
+</html>
